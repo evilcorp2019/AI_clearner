@@ -5,6 +5,7 @@ function DriverUpdater({ systemInfo }) {
   const [isChecking, setIsChecking] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [drivers, setDrivers] = useState([]);
+  const [selectedDrivers, setSelectedDrivers] = useState(new Set());
   const [checkProgress, setCheckProgress] = useState(null);
   const [updateProgress, setUpdateProgress] = useState(null);
   const [windowsUpdateAvailable, setWindowsUpdateAvailable] = useState(null);
@@ -45,12 +46,17 @@ function DriverUpdater({ systemInfo }) {
     setIsChecking(true);
     setCheckProgress(null);
     setDrivers([]);
+    setSelectedDrivers(new Set());
 
     try {
       const result = await window.electronAPI.checkDriverUpdates();
       if (result.success) {
         setDrivers(result.drivers);
-        if (result.driversFound === 0) {
+        // Select all drivers by default
+        if (result.drivers && result.drivers.length > 0) {
+          const allDriverIds = new Set(result.drivers.map(d => d.UpdateID));
+          setSelectedDrivers(allDriverIds);
+        } else {
           alert('All drivers are up to date!');
         }
       } else {
@@ -64,14 +70,33 @@ function DriverUpdater({ systemInfo }) {
     }
   };
 
+  const toggleDriverSelection = (driverId) => {
+    const newSelected = new Set(selectedDrivers);
+    if (newSelected.has(driverId)) {
+      newSelected.delete(driverId);
+    } else {
+      newSelected.add(driverId);
+    }
+    setSelectedDrivers(newSelected);
+  };
+
+  const selectAllDrivers = () => {
+    const allDriverIds = new Set(drivers.map(d => d.UpdateID));
+    setSelectedDrivers(allDriverIds);
+  };
+
+  const deselectAllDrivers = () => {
+    setSelectedDrivers(new Set());
+  };
+
   const handleUpdateDrivers = async () => {
-    if (drivers.length === 0) {
-      alert('No drivers to update');
+    if (selectedDrivers.size === 0) {
+      alert('Please select at least one driver to update');
       return;
     }
 
     const confirmed = confirm(
-      `Update ${drivers.length} driver(s)? This requires administrator privileges and may require a reboot.`
+      `Update ${selectedDrivers.size} selected driver(s)? This requires administrator privileges and may require a reboot.\n\nNote: A system restore point will be created automatically before installation.`
     );
 
     if (!confirmed) return;
@@ -80,7 +105,7 @@ function DriverUpdater({ systemInfo }) {
     setUpdateProgress(null);
 
     try {
-      const driverIds = drivers.map(d => d.UpdateID);
+      const driverIds = Array.from(selectedDrivers);
       const result = await window.electronAPI.updateDrivers(driverIds);
 
       if (result.success) {
@@ -88,15 +113,16 @@ function DriverUpdater({ systemInfo }) {
         alert(message);
 
         if (result.data?.rebootRequired) {
-          const reboot = confirm('A system reboot is required. Reboot now?');
+          const reboot = confirm('A system reboot is required to complete the driver installation. Reboot now?');
           if (reboot) {
-            // Could trigger reboot here
-            alert('Please reboot your system manually.');
+            alert('Please save your work and reboot your system manually.');
           }
         }
 
-        // Clear drivers list after successful update
-        setDrivers([]);
+        // Remove updated drivers from the list
+        const remainingDrivers = drivers.filter(d => !selectedDrivers.has(d.UpdateID));
+        setDrivers(remainingDrivers);
+        setSelectedDrivers(new Set());
       } else {
         alert('Failed to update drivers: ' + result.error);
       }
@@ -162,11 +188,41 @@ function DriverUpdater({ systemInfo }) {
         <div className="drivers-section">
           <div className="drivers-header">
             <h3>Available Updates ({drivers.length})</h3>
+            <div className="selection-controls">
+              <button
+                className="select-btn"
+                onClick={selectAllDrivers}
+                disabled={isUpdating}
+              >
+                Select All
+              </button>
+              <button
+                className="select-btn"
+                onClick={deselectAllDrivers}
+                disabled={isUpdating}
+              >
+                Deselect All
+              </button>
+              <span className="selected-count">
+                {selectedDrivers.size} of {drivers.length} selected
+              </span>
+            </div>
           </div>
 
           <div className="drivers-list">
             {drivers.map((driver, index) => (
-              <div key={index} className="driver-item">
+              <div
+                key={index}
+                className={`driver-item ${selectedDrivers.has(driver.UpdateID) ? 'selected' : ''}`}
+                onClick={() => toggleDriverSelection(driver.UpdateID)}
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedDrivers.has(driver.UpdateID)}
+                  onChange={() => toggleDriverSelection(driver.UpdateID)}
+                  disabled={isUpdating}
+                  className="driver-checkbox"
+                />
                 <div className="driver-info">
                   <div className="driver-title">{driver.Title}</div>
                   <div className="driver-meta">
@@ -187,7 +243,7 @@ function DriverUpdater({ systemInfo }) {
           <button
             className="update-drivers-button"
             onClick={handleUpdateDrivers}
-            disabled={isUpdating}
+            disabled={isUpdating || selectedDrivers.size === 0}
           >
             {isUpdating ? (
               <>
@@ -195,7 +251,7 @@ function DriverUpdater({ systemInfo }) {
                 Updating...
               </>
             ) : (
-              'Update All Drivers'
+              `Update Selected Drivers (${selectedDrivers.size})`
             )}
           </button>
 

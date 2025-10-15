@@ -129,6 +129,42 @@
   font-size: 16px;
   color: var(--text-primary);
   font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.selection-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.select-btn {
+  padding: 6px 12px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select-btn:hover:not(:disabled) {
+  background: var(--border-primary);
+  border-color: var(--accent-primary);
+}
+
+.select-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.selected-count {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-left: auto;
 }
 
 .drivers-list {
@@ -145,12 +181,37 @@
   background: var(--bg-primary);
   border: 1px solid var(--border-primary);
   border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.driver-item:hover {
+  border-color: var(--accent-primary);
+  background: var(--bg-secondary);
+}
+
+.driver-item.selected {
+  border-color: var(--accent-primary);
+  background: rgba(var(--accent-primary-rgb, 59, 130, 246), 0.1);
+}
+
+.driver-checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: var(--accent-primary);
+  flex-shrink: 0;
 }
 
 .driver-info {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex: 1;
 }
 
 .driver-title {
