@@ -1,0 +1,11 @@
+# Project Coding Standards
+
+## UI/UX Guidelines
+- **NO EMOJIS**: Never use emojis in code, UI components, or user-facing text
+- Use text labels instead (e.g., "DIR"/"FILE" instead of folder/file emojis)
+- Keep interface clean and professional
+
+## Code Style
+- Use functional React components
+- Follow ES6+ standards
+- Prefer async/await over promises
