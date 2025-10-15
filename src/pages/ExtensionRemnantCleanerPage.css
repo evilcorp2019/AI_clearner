@@ -12,8 +12,8 @@
 .page-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px 20px;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-xl);
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-primary);
   flex-shrink: 0;
@@ -22,16 +22,16 @@
 .back-button {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
+  gap: var(--spacing-sm);
+  padding: var(--btn-padding-md);
   background: var(--bg-primary);
   border: 1px solid var(--border-primary);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   color: var(--text-primary);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all var(--transition-base);
 }
 
 .back-button:hover {
@@ -46,15 +46,15 @@
 }
 
 .page-info h1 {
-  margin: 0 0 4px 0;
-  font-size: 20px;
-  font-weight: 600;
+  margin: 0 0 var(--spacing-xs) 0;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
 }
 
 .page-info p {
   margin: 0;
-  font-size: 13px;
+  font-size: var(--font-size-base);
   color: var(--text-secondary);
 }
 
@@ -69,7 +69,7 @@
   .page-header {
     flex-direction: column;
     align-items: flex-start;
-    padding: 12px 16px;
+    padding: var(--spacing-md) var(--spacing-lg);
   }
 
   .back-button {
@@ -77,10 +77,10 @@
   }
 
   .page-info h1 {
-    font-size: 18px;
+    font-size: var(--font-size-xl);
   }
 
   .page-info p {
-    font-size: 12px;
+    font-size: var(--font-size-sm);
   }
 }

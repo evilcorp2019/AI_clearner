@@ -8,24 +8,24 @@
 }
 
 .page-header {
-  padding: 20px 30px;
+  padding: var(--spacing-xl) var(--spacing-2xl);
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-secondary);
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: var(--spacing-xl);
 }
 
 .back-button {
-  padding: 8px 16px;
+  padding: var(--btn-padding-md);
   background: var(--bg-secondary);
   color: var(--accent-primary);
   border: 1px solid var(--border-secondary);
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-base);
 }
 
 .back-button:hover {
@@ -33,25 +33,25 @@
 }
 
 .page-header h1 {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
   margin: 0;
 }
 
 .page-content {
   flex: 1;
-  padding: 20px;
+  padding: var(--spacing-xl);
   overflow-y: auto;
 }
 
 .page-content .driver-updater-card {
-  max-width: 800px;
+  max-width: var(--page-width-md);
   margin: 0 auto;
 }
 
 @media (max-width: 768px) {
   .page-content {
-    padding: 10px;
+    padding: var(--spacing-lg);
   }
 }

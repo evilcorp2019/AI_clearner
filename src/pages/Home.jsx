@@ -18,8 +18,7 @@ function Home({ systemInfo, onNavigate }) {
         </svg>
       ),
       available: true,
-      route: 'scheduled-cleaning',
-      featured: true
+      route: 'scheduled-cleaning'
     },
     {
       id: 'startup-manager',
@@ -30,9 +29,7 @@ function Home({ systemInfo, onNavigate }) {
         </svg>
       ),
       available: true,
-      route: 'startup-manager',
-      featured: true,
-      badge: 'HIGH VALUE'
+      route: 'startup-manager'
     },
     {
       id: 'cleaner',
@@ -116,9 +113,7 @@ function Home({ systemInfo, onNavigate }) {
         </svg>
       ),
       available: true,
-      route: 'extension-remnant-cleaner',
-      featured: true,
-      badge: 'UNIQUE'
+      route: 'extension-remnant-cleaner'
     },
     {
       id: 'system-updater',
@@ -161,7 +156,7 @@ function Home({ systemInfo, onNavigate }) {
           {features.map((feature) => (
             <button
               key={feature.id}
-              className={`feature-card ${!feature.available ? 'disabled' : ''} ${feature.featured ? 'featured' : ''}`}
+              className={`feature-card ${!feature.available ? 'disabled' : ''}`}
               onClick={() => feature.available && onNavigate(feature.route)}
               disabled={!feature.available}
             >
@@ -169,9 +164,6 @@ function Home({ systemInfo, onNavigate }) {
                 {feature.icon}
               </div>
               <h2 className="feature-title">{feature.title}</h2>
-              {feature.featured && (
-                <span className="featured-badge">New</span>
-              )}
               {feature.windowsOnly && !isWindows && (
                 <span className="unavailable-indicator">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

@@ -36,14 +36,16 @@ Check for and install system updates automatically.
 - System reboot management
 
 ### Driver Updates (Windows Only)
-Detect and update outdated device drivers with selective installation.
-- Individual driver selection with checkboxes
-- Automatic system restore point creation before updates
-- Selective installation by driver ID
-- Support for large driver downloads (up to 30 minutes)
-- Comprehensive error handling and logging
-- Windows Update integration
-- Requires Administrator privileges
+Detect and update outdated device drivers with multiple fallback mechanisms.
+- **Multi-Method Detection**: PSWindowsUpdate module (primary), Windows Update COM API (fallback), WMI device detection (last resort)
+- **Automatic Service Management**: Detects and attempts to start Windows Update service if stopped
+- **Intelligent Error Handling**: Provides context-aware error messages and troubleshooting steps
+- **Individual Driver Selection**: Checkboxes for selective installation
+- **Safety Features**: Automatic system restore point creation before updates
+- **Support for Large Drivers**: Up to 30 minutes timeout for graphics card and firmware drivers
+- **Multiple Detection Methods**: Works even when Windows Update service is restricted
+- **Administrator Detection**: Checks and prompts for required privileges
+- **PSWindowsUpdate Module**: Automatically installs if needed for improved reliability
 
 ## Installation
 
@@ -215,12 +217,42 @@ npm install
 - Restart the app
 
 ### Driver update issues (Windows)
-- Ensure Windows Update service is running
-- Run the app as Administrator
-- Check internet connection
-- Disable antivirus temporarily if blocking
-- Large drivers (graphics cards) may take 10-30 minutes
+
+**"Windows Update service not available" error:**
+1. **Service is Stopped**: The app will attempt to start it automatically. If that fails:
+   - Right-click the app and select "Run as Administrator"
+   - The app needs admin rights to start the service
+
+2. **Service is Disabled** (common in corporate environments):
+   - Press `Win + R`, type `services.msc`, press Enter
+   - Find "Windows Update" in the list
+   - Right-click > Properties
+   - Change "Startup type" from "Disabled" to "Manual" (recommended) or "Automatic"
+   - Click "Start" to start the service
+   - Click "OK" and restart the app
+
+3. **Alternative Methods**:
+   - The app will automatically try PSWindowsUpdate module if available
+   - If all methods fail, it will detect problem devices using WMI
+   - Problem devices will be listed with instructions to update manually
+
+**PSWindowsUpdate module installation:**
+- First-time use may take 1-2 minutes to install the module
+- Requires internet connection
+- If installation fails, the app falls back to Windows Update COM API
+
+**Other issues:**
+- Ensure Windows Update service is not blocked by Group Policy (corporate PCs)
+- Check internet connection for downloading updates
+- Disable antivirus temporarily if blocking Windows Update
+- Large drivers (graphics cards, chipsets) may take 10-30 minutes to download and install
 - System restore point is created automatically before updates
+- If updates fail, you can restore from the restore point in System Properties
+
+**Manual alternative:**
+1. Open Device Manager (devmgmt.msc)
+2. Look for devices with yellow warning icons
+3. Right-click > Update driver > Search automatically for drivers
 
 See [docs/DOCUMENTATION.md](docs/DOCUMENTATION.md) for more troubleshooting tips.
 

@@ -51,19 +51,56 @@ function DriverUpdater({ systemInfo }) {
     try {
       const result = await window.electronAPI.checkDriverUpdates();
       if (result.success) {
-        setDrivers(result.drivers);
-        // Select all drivers by default
-        if (result.drivers && result.drivers.length > 0) {
-          const allDriverIds = new Set(result.drivers.map(d => d.UpdateID));
+        // Show method used for debugging
+        console.log(`Driver check completed using method: ${result.method}`);
+
+        // Handle different scenarios
+        if (result.problemDevices && result.problemDevices.length > 0) {
+          // WMI method found problem devices but couldn't fetch updates
+          let message = `Found ${result.problemDevices.length} device(s) with driver issues:\n\n`;
+          result.problemDevices.forEach(device => {
+            message += `- ${device.Name}\n  Issue: ${device.ErrorDescription}\n\n`;
+          });
+          message += '\nWindows Update service is not accessible. Please:\n';
+          message += '1. Run this app as Administrator\n';
+          message += '2. Enable Windows Update service in Windows Services\n';
+          message += '3. Or manually update these drivers from Device Manager';
+          alert(message);
+        } else if (result.drivers && result.drivers.length > 0) {
+          // Successfully found driver updates
+          setDrivers(result.drivers);
+          const allDriverIds = new Set(result.drivers.map(d => d.UpdateID || d.KB));
           setSelectedDrivers(allDriverIds);
+
+          let methodInfo = '';
+          if (result.method === 'PSWindowsUpdate') {
+            methodInfo = '\n\n(Using PSWindowsUpdate module - more reliable)';
+          }
+
+          alert(`Found ${result.drivers.length} driver update(s) available!${methodInfo}`);
         } else {
-          alert('All drivers are up to date!');
+          // No updates found
+          let message = 'All drivers are up to date!';
+          if (result.method === 'PSWindowsUpdate') {
+            message += '\n\n(Checked using PSWindowsUpdate module)';
+          }
+          alert(message);
         }
       } else {
-        alert('Failed to check drivers: ' + result.error);
+        // Check failed
+        let errorMsg = 'Failed to check drivers: ' + (result.error || result.message || 'Unknown error');
+
+        // Add helpful context
+        if (result.error && result.error.includes('Administrator')) {
+          errorMsg += '\n\nTip: Try running this application as Administrator for full functionality.';
+        } else if (result.error && result.error.includes('Windows Update')) {
+          errorMsg += '\n\nTip: The Windows Update service may need to be enabled in Windows Services (services.msc).';
+        }
+
+        alert(errorMsg);
       }
     } catch (error) {
-      alert('Error checking drivers: ' + error.message);
+      alert('Error checking drivers: ' + error.message + '\n\nPlease ensure you have administrator privileges and Windows Update is enabled.');
     } finally {
       setIsChecking(false);
       setCheckProgress(null);
@@ -81,7 +118,7 @@ function DriverUpdater({ systemInfo }) {
   };
 
   const selectAllDrivers = () => {
-    const allDriverIds = new Set(drivers.map(d => d.UpdateID));
+    const allDriverIds = new Set(drivers.map((d, index) => d.UpdateID || d.KB || `driver-${index}`));
     setSelectedDrivers(allDriverIds);
   };
 
@@ -146,11 +183,65 @@ function DriverUpdater({ systemInfo }) {
   }
 
   if (windowsUpdateAvailable && !windowsUpdateAvailable.available) {
+    const canRetry = windowsUpdateAvailable.status === 'stopped' || windowsUpdateAvailable.status === 'error';
+
     return (
-      <div className="driver-updater-card disabled">
+      <div className="driver-updater-card">
         <h2>Driver Updates</h2>
-        <p className="unavailable-message">
-          Windows Update service is not available: {windowsUpdateAvailable.reason}
+        <div className="service-status-warning">
+          <p className="unavailable-message">
+            <strong>Windows Update Service Status:</strong> {windowsUpdateAvailable.reason}
+          </p>
+
+          {windowsUpdateAvailable.status === 'disabled' && (
+            <div className="help-message">
+              <p>The Windows Update service is disabled on your system.</p>
+              <p>To enable it:</p>
+              <ol>
+                <li>Press Win + R and type: services.msc</li>
+                <li>Find "Windows Update" service</li>
+                <li>Right-click and select "Properties"</li>
+                <li>Set "Startup type" to "Manual" or "Automatic"</li>
+                <li>Click "Apply" and restart this application</li>
+              </ol>
+            </div>
+          )}
+
+          {canRetry && (
+            <button
+              className="check-drivers-button"
+              onClick={checkWindowsUpdateService}
+              style={{ marginTop: '10px' }}
+            >
+              Retry Service Check
+            </button>
+          )}
+
+          {windowsUpdateAvailable.wasStarted && (
+            <p className="success-message" style={{ marginTop: '10px', color: '#4caf50' }}>
+              Windows Update service was successfully started! You can now check for driver updates.
+            </p>
+          )}
+        </div>
+
+        <button
+          className="check-drivers-button"
+          onClick={handleCheckDrivers}
+          disabled={isChecking || isUpdating}
+          style={{ marginTop: '15px' }}
+        >
+          {isChecking ? (
+            <>
+              <span className="spinner"></span>
+              Checking...
+            </>
+          ) : (
+            'Try Checking for Driver Updates Anyway'
+          )}
+        </button>
+
+        <p className="info-note" style={{ marginTop: '10px', fontSize: '0.9em', color: '#888' }}>
+          Note: This will attempt to use alternative methods (PSWindowsUpdate module or WMI) to detect driver issues.
         </p>
       </div>
     );
@@ -210,34 +301,45 @@ function DriverUpdater({ systemInfo }) {
           </div>
 
           <div className="drivers-list">
-            {drivers.map((driver, index) => (
-              <div
-                key={index}
-                className={`driver-item ${selectedDrivers.has(driver.UpdateID) ? 'selected' : ''}`}
-                onClick={() => toggleDriverSelection(driver.UpdateID)}
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedDrivers.has(driver.UpdateID)}
-                  onChange={() => toggleDriverSelection(driver.UpdateID)}
-                  disabled={isUpdating}
-                  className="driver-checkbox"
-                />
-                <div className="driver-info">
-                  <div className="driver-title">{driver.Title}</div>
-                  <div className="driver-meta">
-                    {driver.DriverManufacturer && (
-                      <span className="driver-manufacturer">
-                        {driver.DriverManufacturer}
-                      </span>
-                    )}
-                    {driver.DriverClass && (
-                      <span className="driver-class">{driver.DriverClass}</span>
-                    )}
+            {drivers.map((driver, index) => {
+              const driverId = driver.UpdateID || driver.KB || `driver-${index}`;
+              return (
+                <div
+                  key={index}
+                  className={`driver-item ${selectedDrivers.has(driverId) ? 'selected' : ''}`}
+                  onClick={() => toggleDriverSelection(driverId)}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedDrivers.has(driverId)}
+                    onChange={() => toggleDriverSelection(driverId)}
+                    disabled={isUpdating}
+                    className="driver-checkbox"
+                  />
+                  <div className="driver-info">
+                    <div className="driver-title">{driver.Title}</div>
+                    <div className="driver-meta">
+                      {driver.DriverManufacturer && (
+                        <span className="driver-manufacturer">
+                          {driver.DriverManufacturer}
+                        </span>
+                      )}
+                      {driver.DriverClass && (
+                        <span className="driver-class">{driver.DriverClass}</span>
+                      )}
+                      {driver.KB && (
+                        <span className="driver-kb">KB: {driver.KB}</span>
+                      )}
+                      {driver.Size && (
+                        <span className="driver-size">
+                          Size: {(driver.Size / 1024 / 1024).toFixed(2)} MB
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <button

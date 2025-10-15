@@ -1,7 +1,15 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { scanSystem, cleanFiles } = require('./cleaner');
-const { checkDriverUpdates, updateDrivers, checkWindowsUpdate } = require('./driverUpdater');
+const {
+  checkDriverUpdates,
+  updateDrivers,
+  checkWindowsUpdate,
+  checkAdminPrivileges,
+  checkPSWindowsUpdateModule,
+  installPSWindowsUpdateModule,
+  detectProblemDevices
+} = require('./driverUpdater');
 const { checkSystemUpdates, installSystemUpdates } = require('./systemUpdater');
 const { findDuplicates, deleteDuplicates } = require('./duplicateFinder');
 const { detectBrowsers, analyzeBrowserData, cleanBrowserData } = require('./browserCleaner');
@@ -217,6 +225,42 @@ ipcMain.handle('update-drivers', async (event, driverIds) => {
       event.sender.send('driver-update-progress', progress);
     });
     return results;
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle('check-admin-privileges', async () => {
+  try {
+    const result = await checkAdminPrivileges();
+    return { success: true, data: result };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle('check-pswu-module', async () => {
+  try {
+    const result = await checkPSWindowsUpdateModule();
+    return { success: true, data: result };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle('install-pswu-module', async () => {
+  try {
+    const result = await installPSWindowsUpdateModule();
+    return { success: true, data: result };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle('detect-problem-devices', async () => {
+  try {
+    const result = await detectProblemDevices();
+    return result;
   } catch (error) {
     return { success: false, error: error.message };
   }
