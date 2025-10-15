@@ -36,10 +36,14 @@ Check for and install system updates automatically.
 - System reboot management
 
 ### Driver Updates (Windows Only)
-Detect and update outdated device drivers.
-- Hardware scanning and analysis
-- Update recommendations
-- Windows driver database integration
+Detect and update outdated device drivers with selective installation.
+- Individual driver selection with checkboxes
+- Automatic system restore point creation before updates
+- Selective installation by driver ID
+- Support for large driver downloads (up to 30 minutes)
+- Comprehensive error handling and logging
+- Windows Update integration
+- Requires Administrator privileges
 
 ## Installation
 
@@ -86,6 +90,18 @@ Detect and update outdated device drivers.
 3. Choose data types to clean
 4. Click "Analyze" to preview space savings
 5. Click "Clean Now" and confirm
+
+### Driver Updates (Windows Only)
+1. Click "Driver Updates" on home page
+2. Click "Check for Driver Updates" and wait for scan
+3. Review available driver updates with details
+4. Select individual drivers to update using checkboxes
+5. Use "Select All" or "Deselect All" for batch selection
+6. Click "Install Selected Drivers" and confirm
+7. A system restore point will be created automatically
+8. Wait for installation to complete (may take 10-30 minutes for large drivers)
+
+Note: May require running the app as Administrator. Windows Update service must be enabled.
 
 ## Technology Stack
 
@@ -191,12 +207,20 @@ npm install
 
 ### Permission errors
 - Grant Full Disk Access on macOS
-- Run as Administrator on Windows (if needed)
+- Run as Administrator on Windows (required for driver updates)
 
 ### Browser cleaning fails
 - Close the browser completely
 - Check if browser process is still running
 - Restart the app
+
+### Driver update issues (Windows)
+- Ensure Windows Update service is running
+- Run the app as Administrator
+- Check internet connection
+- Disable antivirus temporarily if blocking
+- Large drivers (graphics cards) may take 10-30 minutes
+- System restore point is created automatically before updates
 
 See [docs/DOCUMENTATION.md](docs/DOCUMENTATION.md) for more troubleshooting tips.
 

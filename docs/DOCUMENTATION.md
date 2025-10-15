@@ -131,7 +131,13 @@ Windows:
 
 ### 3. Driver Updates (Windows Only)
 
-**Purpose:** Detect and update outdated device drivers.
+**Purpose:** Detect and update outdated device drivers with selective installation.
+
+**Requirements:**
+- Windows operating system (Windows 7 or later)
+- Administrator privileges required
+- Windows Update service must be enabled
+- Internet connection for driver downloads
 
 **Supported Categories:**
 - Graphics cards (GPU)
@@ -143,10 +149,57 @@ Windows:
 - Peripherals
 
 **Features:**
-- Hardware scanning
-- Version comparison
-- Update recommendations
-- Windows driver database integration
+- Hardware scanning via Windows Update API
+- Individual driver selection with checkboxes
+- Selective installation by UpdateID (properly filtered)
+- Automatic system restore point creation before updates
+- Extended timeout support (30 minutes for large drivers)
+- Comprehensive error handling with helpful messages
+- Result code interpretation (Success, In Progress, Failed, etc.)
+- Debug logging throughout the process
+- Select All / Deselect All batch operations
+
+**Implementation Details:**
+
+Driver Detection:
+- Uses Windows Update COM API (Microsoft.Update.Session)
+- Searches for driver-only updates
+- Filters by category (Drivers)
+- Returns UpdateID, Title, Description, and Size
+
+Driver Installation:
+1. Creates system restore point before installation
+2. Writes PowerShell script to temporary file
+3. Filters updates by selected UpdateIDs
+4. Downloads selected drivers
+5. Installs selected drivers
+6. Reports detailed results with status codes
+
+**Result Codes:**
+- 2: Success (Successfully installed)
+- 3: Success with errors (Completed with some errors)
+- 4: Failed (Installation failed)
+- 5: Aborted (Installation was cancelled)
+- Other: In progress or pending
+
+**Error Handling:**
+- Permission errors with helpful messages
+- Timeout errors for large downloads (30 minute max)
+- Windows Update service not running detection
+- Driver download failures
+- Installation failures with specific error codes
+
+**Performance:**
+- Small drivers: 1-5 minutes
+- Medium drivers (network, audio): 5-15 minutes
+- Large drivers (graphics cards): 10-30 minutes
+- Progress updates via PowerShell output streaming
+
+**Safety:**
+- System restore point created automatically before any installation
+- Only installs user-selected drivers by UpdateID
+- Validates Windows Update service availability
+- Proper privilege escalation with UAC prompt
 
 ### 4. Duplicate File Finder
 
@@ -525,9 +578,15 @@ window.api.installUpdates()
 ```javascript
 window.api.checkDrivers()
   // Returns: { success: true, drivers: [...] }
+  // Each driver includes: updateId, title, description, driverClass,
+  // driverProvider, driverDate, driverVersion
 
-window.api.updateDrivers(driverIds)
-  // Returns: { success: true }
+window.api.updateDrivers(selectedDriverIds)
+  // Parameters: Array of UpdateIDs (strings)
+  // Returns: { success: true, results: [...] } or { success: false, error: "message" }
+  // Creates system restore point automatically before installation
+  // May take 10-30 minutes for large drivers
+  // Requires Administrator privileges
 ```
 
 ### Response Format
@@ -687,6 +746,36 @@ npm install
 - Verify process names in config
 - Test command manually in terminal
 
+**Driver updates fail (Windows only):**
+- Run application as Administrator (required for driver installation)
+- Check if Windows Update service is running:
+  ```cmd
+  sc query wuauserv
+  ```
+- Enable Windows Update service if disabled:
+  ```cmd
+  sc config wuauserv start=demand
+  sc start wuauserv
+  ```
+- Check internet connection
+- Temporarily disable antivirus if it's blocking driver downloads
+- Large drivers (especially graphics cards) can take 10-30 minutes to download and install
+- Check available disk space (some drivers require 1-2 GB)
+- System restore point is created automatically before any installation
+
+**Driver update timeout errors:**
+- This is normal for large drivers (graphics cards especially)
+- Timeout is set to 30 minutes to accommodate large downloads
+- If timeout occurs, check Windows Update logs
+- Try updating one driver at a time for large drivers
+- Ensure stable internet connection
+
+**Driver installation permissions:**
+- UAC prompt will appear - must be accepted
+- Application must be run as Administrator
+- User must have administrator privileges on the system
+- Some corporate policies may block driver installation
+
 ---
 
 ## Resources
@@ -712,8 +801,22 @@ npm install
 - Professional design system
 - Cross-platform support (macOS, Windows)
 
+**v1.0.1 (2025-10-15)**
+- Fixed critical driver updater bugs
+- Added selective driver installation by UpdateID
+- Implemented automatic system restore point creation
+- Added individual driver selection UI with checkboxes
+- Increased timeout to 30 minutes for large driver downloads
+- Improved PowerShell execution for better output capture
+- Enhanced error handling with helpful messages
+- Added result code mapping for Windows Update
+- Implemented comprehensive debug logging
+- Fixed driver ID filtering (was installing ALL drivers instead of selected ones)
+- Fixed UAC/privilege escalation issues
+- Added Select All / Deselect All functionality
+
 ---
 
-**Document Version:** 2.0
+**Document Version:** 2.1
 **Last Updated:** 2025-10-15
 **Maintained By:** Development Team

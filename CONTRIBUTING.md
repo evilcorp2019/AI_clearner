@@ -233,9 +233,14 @@ contextBridge.exposeInMainWorld('api', {
 
 **Windows:**
 - All features functional
-- Driver updater (Windows-only)
+- Driver updater (Windows-only, requires Administrator privileges)
+  - Test selective driver installation
+  - Verify system restore point creation
+  - Check timeout handling for large drivers
+  - Validate error messages for common issues
 - Windows-specific paths
 - Process detection
+- UAC prompt handling
 
 ## Pull Request Guidelines
 
@@ -338,6 +343,20 @@ const handleAction = async () => {
 - Sanitize IPC inputs
 - Use contextBridge for IPC
 - Never disable contextIsolation
+
+### Windows-Specific Security (Driver Updates)
+
+When working on driver updater functionality:
+
+- Always filter drivers by UpdateID before installation
+- Create system restore point before any driver installation
+- Write PowerShell scripts to temporary files (avoid command-line escaping issues)
+- Use proper privilege escalation with Start-Process -Verb RunAs
+- Validate Windows Update service is running before operations
+- Never install all available drivers without user selection
+- Implement timeout protection (30 minutes for large drivers)
+- Provide clear error messages for permission issues
+- Log all operations for debugging
 
 ## Performance Best Practices
 
