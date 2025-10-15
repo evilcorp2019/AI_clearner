@@ -34,7 +34,7 @@ function DuplicateFileFinder({ onBack }) {
 
   const handleScan = async () => {
     if (!window.electronAPI) {
-      alert('This feature requires Electron. Please run the app with "npm run dev"');
+      alert('This feature requires the desktop application. Please run the app with "npm run dev"');
       return;
     }
 
@@ -70,7 +70,7 @@ function DuplicateFileFinder({ onBack }) {
 
   const handleDelete = async () => {
     if (!window.electronAPI) {
-      alert('This feature requires Electron. Please run the app with "npm run dev"');
+      alert('This feature requires the desktop application. Please run the app with "npm run dev"');
       return;
     }
 
@@ -417,7 +417,7 @@ function DuplicateFileFinder({ onBack }) {
                           }}
                           title={allSelected ? 'Deselect all in group' : 'Select all duplicates (keep first)'}
                         >
-                          {allSelected ? '✓' : someSelected ? '−' : ''}
+                          {allSelected ? '' : someSelected ? '−' : ''}
                         </button>
                       </div>
                     </div>

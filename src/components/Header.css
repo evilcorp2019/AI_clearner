@@ -23,20 +23,6 @@
   color: var(--text-primary);
 }
 
-.electron-badge {
-  display: inline-block;
-  padding: 4px 10px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  font-size: 11px;
-  font-weight: 600;
-  border-radius: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-left: 8px;
-  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
-}
-
 .header-right {
   display: flex;
   align-items: center;

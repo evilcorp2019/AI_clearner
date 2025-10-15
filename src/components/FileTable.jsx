@@ -167,7 +167,7 @@ function FileTable({ files, selectedFiles, onFileSelect, onSelectAll, onOpenLoca
                   onClick={() => onSelectAll(paginatedFiles, !allSelected)}
                   title={allSelected ? 'Deselect all on page' : 'Select all on page'}
                 >
-                  {allSelected ? '✓' : someSelected ? '−' : ''}
+                  {allSelected ? '' : someSelected ? '−' : ''}
                 </button>
               </th>
               <th className="icon-column"></th>

@@ -32,7 +32,7 @@ function SystemUpdaterPage({ systemInfo, onBack }) {
 
   const handleCheckUpdates = async () => {
     if (!window.electronAPI) {
-      alert('This feature requires Electron. Please run the app with "npm run dev"');
+      alert('This feature requires the desktop application. Please run the app with "npm run dev"');
       return;
     }
 
@@ -59,7 +59,7 @@ function SystemUpdaterPage({ systemInfo, onBack }) {
 
   const handleInstallUpdates = async () => {
     if (!window.electronAPI) {
-      alert('This feature requires Electron. Please run the app with "npm run dev"');
+      alert('This feature requires the desktop application. Please run the app with "npm run dev"');
       return;
     }
 

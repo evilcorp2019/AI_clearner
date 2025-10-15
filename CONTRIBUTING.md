@@ -30,9 +30,9 @@ The application will launch with hot reloading enabled.
 ### Available Commands
 
 ```bash
-npm run dev          # Start development mode (React + Electron)
+npm run dev          # Start development mode (React + Application Backend)
 npm run build        # Build React app for production
-npm start            # Run Electron with built app
+npm start            # Run Application Backend with built app
 npm run package      # Create distributable package
 ```
 
@@ -157,7 +157,7 @@ export default Component;
 
 ```
 cleaner/
-├── electron/              # Main process (Node.js)
+├── backend/              # Main process (Node.js)
 │   ├── main.js           # Entry point, IPC handlers
 │   ├── preload.js        # IPC bridge
 │   ├── cleaner.js        # System cleaner logic
@@ -175,21 +175,21 @@ cleaner/
 
 ## Adding New Features
 
-### Backend (Electron)
+### Backend (Application Backend)
 
-1. Create module in `electron/`
-2. Add IPC handlers in `electron/main.js`
-3. Expose API in `electron/preload.js`
+1. Create module in `backend/`
+2. Add IPC handlers in `backend/main.js`
+3. Expose API in `backend/preload.js`
 
 ```javascript
-// electron/newFeature.js
+// backend/newFeature.js
 async function doSomething() {
   // Implementation
   return result;
 }
 module.exports = { doSomething };
 
-// electron/main.js
+// backend/main.js
 const { doSomething } = require('./newFeature');
 ipcMain.handle('new-feature', async () => {
   try {
@@ -200,7 +200,7 @@ ipcMain.handle('new-feature', async () => {
   }
 });
 
-// electron/preload.js
+// backend/preload.js
 contextBridge.exposeInMainWorld('api', {
   newFeature: () => ipcRenderer.invoke('new-feature')
 });
@@ -370,7 +370,7 @@ When working on driver updater functionality:
 
 - Review documentation in `docs/`
 - Check existing issues
-- Read [Electron docs](https://www.electronjs.org/docs)
+- Read [Application Backend docs](https://nodejs.org/docs)
 - Read [React docs](https://react.dev)
 
 ## License

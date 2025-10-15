@@ -1,6 +1,6 @@
 # System Cleaner
 
-A professional, cross-platform desktop application for system optimization and maintenance. Built with Electron and React, System Cleaner provides a comprehensive suite of tools to keep your computer running smoothly.
+A professional, cross-platform desktop application for system optimization and maintenance. Built with React, System Cleaner provides a comprehensive suite of tools to keep your computer running smoothly.
 
 ![System Cleaner](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -106,7 +106,7 @@ Note: May require running the app as Administrator. Windows Update service must 
 ## Technology Stack
 
 - **Frontend**: React 18.2.0 with Vite 5.0.11
-- **Desktop Framework**: Electron 28.1.0
+
 - **Icons**: react-icons 5.5.0
 - **Styling**: Modern CSS
 - **Runtime**: Node.js v16+
@@ -123,7 +123,7 @@ System Cleaner features a professional, desktop-optimized design:
 
 ```
 cleaner/
-├── electron/              # Electron main process
+├── electron/              # Application backend
 │   ├── main.js           # Application entry & IPC handlers
 │   ├── preload.js        # IPC bridge
 │   ├── cleaner.js        # System cleaner logic
@@ -145,7 +145,7 @@ cleaner/
 
 - `npm run dev` - Start development with hot reload
 - `npm run build` - Build React app for production
-- `npm start` - Run Electron app (after building)
+- `npm start` - Run application (after building)
 - `npm run package` - Create distributable package
 - `npm run dev:react` - Run only React dev server
 
@@ -169,7 +169,7 @@ System Preferences > Security & Privacy > Privacy > Full Disk Access
 
 ## Performance
 
-- **Fast Startup**: Optimized Electron bundle
+- **Fast Startup**: Optimized application bundle
 - **Efficient Scanning**: Parallel file operations, 10,000+ files in ~30 seconds
 - **Memory Safe**: Streaming I/O for large files
 - **Smooth UI**: Hardware-accelerated transforms, sub-200ms interactions
@@ -240,7 +240,7 @@ While System Cleaner is designed with safety in mind:
 
 - Icons by react-icons (Simple Icons and Tabler Icons)
 - Inspired by CCleaner, CleanMyMac, and modern desktop apps
-- Built with Electron, React, and Vite
+- Built with React and Vite
 
 ---
 

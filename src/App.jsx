@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     console.log('[APP] window.electronAPI:', window.electronAPI);
     if (window.electronAPI) {
-      console.log('[APP] Electron API detected, fetching system info');
+      console.log('[APP] Desktop API detected, fetching system info');
       window.electronAPI.getSystemInfo().then(info => {
         console.log('[APP] System info received:', info);
         setSystemInfo(info);
@@ -30,7 +30,7 @@ function App() {
         console.error('[APP] Failed to get system info:', err);
       });
     } else {
-      console.warn('[APP] Electron API not available - running in browser mode');
+      console.warn('[APP] Desktop API not available - running in browser mode');
       // Mock data for development/testing
       setSystemInfo({
         platform: 'browser',
@@ -81,7 +81,7 @@ function App() {
       <div className="app">
         <Header systemInfo={systemInfo} />
         {!window.electronAPI && (
-          <div className="electron-warning-banner">
+          <div className="app-warning-banner">
             <div className="warning-content">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
@@ -91,7 +91,7 @@ function App() {
               <div className="warning-text">
                 <strong>Wrong Window! Close This Browser Tab</strong>
                 <p>
-                  You've opened this app in a web browser, but it needs to run in Electron.
+                  You've opened this app in a web browser, but it needs to run as a desktop application.
                   <strong> Please close this browser tab</strong> and look for the separate "System Cleaner" application window.
                   If you don't see it, run <code>npm run dev</code> in your terminal to start it.
                 </p>
@@ -99,7 +99,7 @@ function App() {
               <button
                 className="close-tab-button"
                 onClick={() => {
-                  if (confirm('This will close this browser tab. Make sure the Electron window is visible!')) {
+                  if (confirm('This will close this browser tab. Make sure the application window is visible!')) {
                     window.close();
                   }
                 }}

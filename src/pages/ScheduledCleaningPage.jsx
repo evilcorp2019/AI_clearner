@@ -349,7 +349,7 @@ function ScheduledCleaningPage({ onBack }) {
                 <div className="activity-details">
                   <div className="activity-title">
                     {profiles.find(p => p.id === log.profileId)?.name || 'Unknown Profile'}
-                    {log.success ? ' ✓' : ' ✗'}
+                    {log.success ? ' ' : ' '}
                   </div>
                   <div className="activity-meta">
                     {formatDate(log.executedAt)} •

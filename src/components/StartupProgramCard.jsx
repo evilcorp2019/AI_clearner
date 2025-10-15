@@ -9,9 +9,9 @@ const StartupProgramCard = ({ program, onToggle, onRemove, selected, onSelect })
     const impactClass = `impact-badge impact-${program.impact}`;
     const impactText = program.impact.toUpperCase();
     const impactIcon = {
-      high: '🔴',
-      medium: '🟡',
-      low: '🟢'
+      high: '',
+      medium: '',
+      low: ''
     };
 
     return (

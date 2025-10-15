@@ -70,7 +70,7 @@ function BrowserCleaner({ onBack }) {
 
   const detectBrowsers = async () => {
     if (!window.electronAPI) {
-      alert('This feature requires Electron. Please run the app with "npm run dev"');
+      alert('This feature requires the desktop application. Please run the app with "npm run dev"');
       setLoading(false);
       return;
     }

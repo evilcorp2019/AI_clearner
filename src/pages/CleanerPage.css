@@ -2,7 +2,9 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
 }
 
 .page-header {
@@ -42,8 +44,10 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   gap: 20px;
+  min-height: 0;
 }
 
 .control-panel {

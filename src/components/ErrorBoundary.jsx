@@ -36,10 +36,10 @@ class ErrorBoundary extends React.Component {
             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)'
           }}>
             <h1 style={{ color: '#e94560', marginBottom: '20px' }}>
-              ⚠️ Application Error
+               Application Error
             </h1>
             <p style={{ fontSize: '18px', marginBottom: '20px', lineHeight: '1.6' }}>
-              This application must be run through Electron, not directly in a web browser.
+              This application must be run as a desktop application, not directly in a web browser.
             </p>
             <div style={{
               backgroundColor: '#1a1a2e',
@@ -55,7 +55,7 @@ class ErrorBoundary extends React.Component {
                 $ npm run dev
               </p>
               <p style={{ margin: '5px 0', fontFamily: 'monospace', fontSize: '14px', color: '#888' }}>
-                (This will open the Electron window)
+                (This will open the application window)
               </p>
             </div>
             <details style={{ marginTop: '20px', textAlign: 'left' }}>

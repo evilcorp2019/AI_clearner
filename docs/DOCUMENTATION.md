@@ -17,7 +17,7 @@ Complete technical documentation for System Cleaner including architecture, feat
 ### Technology Stack
 
 - **Frontend**: React 18.2.0 with Vite 5.0.11
-- **Desktop**: Electron 28.1.0
+- 
 - **Icons**: react-icons 5.5.0
 - **Styling**: Modern CSS (no preprocessors)
 - **Runtime**: Node.js v16+
@@ -62,7 +62,7 @@ ipcMain.handle('scan-files', async () => {
 
 ```
 cleaner/
-├── electron/                  # Electron main process
+├── backend/                  # Application Backend main process
 │   ├── main.js               # Application entry & IPC handlers
 │   ├── preload.js            # IPC bridge
 │   ├── cleaner.js            # System cleaner logic
@@ -458,7 +458,7 @@ pointer-events: none;
 npm install        # Install dependencies
 npm run dev        # Start development mode
 npm run build      # Build for production
-npm start          # Run Electron app
+npm start          # Run Application Backend app
 npm run package    # Create distributable
 ```
 
@@ -466,13 +466,13 @@ npm run package    # Create distributable
 
 **Hot Reloading:**
 - React changes: Instant HMR
-- Electron main: Requires restart
+- Application Backend main: Requires restart
 - Preload script: Requires restart
 
 **Adding Features:**
 
-1. Backend (Electron):
-   - Create module in `electron/`
+1. Backend (Application Backend):
+   - Create module in `backend/`
    - Add IPC handlers in `main.js`
    - Expose API in `preload.js`
 
@@ -533,7 +533,7 @@ npm run package    # electron-builder creates DMG/exe
 
 ## API Reference
 
-### Electron IPC Handlers
+### Application Backend IPC Handlers
 
 **System Cleaner:**
 ```javascript
@@ -728,7 +728,7 @@ npm cache clean --force
 npm install
 ```
 
-**Electron won't start:**
+**Application Backend won't start:**
 - Check port 3000 is available
 - Verify Vite dev server starts
 - Try rebuilding: `npm run build && npm start`
@@ -781,7 +781,7 @@ npm install
 ## Resources
 
 **Documentation:**
-- [Electron Docs](https://www.electronjs.org/docs)
+- [Application Backend Docs](https://nodejs.org/docs)
 - [React Docs](https://react.dev)
 - [Vite Docs](https://vitejs.dev)
 

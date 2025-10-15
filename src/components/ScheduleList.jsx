@@ -9,7 +9,7 @@ function ScheduleList({ schedules, profiles, onEdit, onDelete, onToggle, onCreat
 
   const getProfileIcon = (profileId) => {
     const profile = profiles.find(p => p.id === profileId);
-    return profile ? profile.icon : '❓';
+    return profile ? profile.icon : '';
   };
 
   const formatSchedule = (schedule) => {

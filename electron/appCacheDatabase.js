@@ -41,7 +41,7 @@ const APPLICATIONS = {
   discord: {
     name: 'Discord',
     category: 'Communication',
-    icon: '💬',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Discord', '~/Library/Application Support/Discord/Cache', '~/Library/Application Support/Discord/Code Cache'],
       win32: ['%AppData%/discord/Cache', '%AppData%/discord/Code Cache', '%AppData%/discord/GPUCache'],
@@ -61,7 +61,7 @@ const APPLICATIONS = {
   slack: {
     name: 'Slack',
     category: 'Communication',
-    icon: '💼',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Slack', '~/Library/Application Support/Slack/Cache', '~/Library/Application Support/Slack/Code Cache'],
       win32: ['%AppData%/Slack/Cache', '%AppData%/Slack/Code Cache', '%AppData%/Slack/Service Worker/CacheStorage'],
@@ -81,7 +81,7 @@ const APPLICATIONS = {
   teams: {
     name: 'Microsoft Teams',
     category: 'Communication',
-    icon: '👥',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/com.microsoft.teams', '~/Library/Application Support/Microsoft/Teams/Cache'],
       win32: ['%AppData%/Microsoft/Teams/Cache', '%AppData%/Microsoft/Teams/blob_storage', '%AppData%/Microsoft/Teams/Service Worker/CacheStorage'],
@@ -101,7 +101,7 @@ const APPLICATIONS = {
   zoom: {
     name: 'Zoom',
     category: 'Communication',
-    icon: '📹',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/us.zoom.xos'],
       win32: ['%AppData%/Zoom/logs', '%AppData%/Zoom/data'],
@@ -121,7 +121,7 @@ const APPLICATIONS = {
   skype: {
     name: 'Skype',
     category: 'Communication',
-    icon: '📞',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/com.skype.skype', '~/Library/Application Support/Skype/Media Cache'],
       win32: ['%AppData%/Skype/Media Cache', '%AppData%/Microsoft/Skype for Desktop/Cache'],
@@ -141,7 +141,7 @@ const APPLICATIONS = {
   telegram: {
     name: 'Telegram',
     category: 'Communication',
-    icon: '✈️',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Telegram', '~/Library/Application Support/Telegram Desktop/tdata/user_data'],
       win32: ['%AppData%/Telegram Desktop/tdata/user_data'],
@@ -162,7 +162,7 @@ const APPLICATIONS = {
   spotify: {
     name: 'Spotify',
     category: 'Media',
-    icon: '🎵',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/com.spotify.client', '~/Library/Caches/com.spotify.client.helper', '~/Library/Application Support/Spotify/PersistentCache'],
       win32: ['%AppData%/Spotify/Cache', '%AppData%/Spotify/Data'],
@@ -182,7 +182,7 @@ const APPLICATIONS = {
   steam: {
     name: 'Steam',
     category: 'Gaming',
-    icon: '🎮',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Steam', '~/Library/Application Support/Steam/appcache', '~/Library/Application Support/Steam/Steam.AppBundle/Steam/Contents/MacOS/shader_cache_temp_dir_*'],
       win32: ['%ProgramFiles(x86)%/Steam/appcache', '%ProgramFiles(x86)%/Steam/config/htmlcache'],
@@ -202,7 +202,7 @@ const APPLICATIONS = {
   epicgames: {
     name: 'Epic Games Launcher',
     category: 'Gaming',
-    icon: '🎯',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/com.epicgames.EpicGamesLauncher'],
       win32: ['%LocalAppData%/EpicGamesLauncher/Saved/webcache', '%LocalAppData%/EpicGamesLauncher/Saved/Logs'],
@@ -222,7 +222,7 @@ const APPLICATIONS = {
   battlenet: {
     name: 'Battle.net',
     category: 'Gaming',
-    icon: '⚔️',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Application Support/Battle.net/Cache', '~/Library/Caches/com.blizzard.Battle.net'],
       win32: ['%ProgramData%/Battle.net/Cache', '%AppData%/Battle.net/Cache'],
@@ -242,7 +242,7 @@ const APPLICATIONS = {
   itunes: {
     name: 'iTunes/Music',
     category: 'Media',
-    icon: '🎶',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/com.apple.iTunes', '~/Library/Caches/com.apple.Music'],
       win32: ['%LocalAppData%/Apple Computer/iTunes/Cache'],
@@ -262,7 +262,7 @@ const APPLICATIONS = {
   vlc: {
     name: 'VLC Media Player',
     category: 'Media',
-    icon: '🎬',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/org.videolan.vlc'],
       win32: ['%AppData%/vlc/cache'],
@@ -283,7 +283,7 @@ const APPLICATIONS = {
   vscode: {
     name: 'Visual Studio Code',
     category: 'Development',
-    icon: '💻',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Code', '~/Library/Application Support/Code/Cache', '~/Library/Application Support/Code/CachedData', '~/Library/Application Support/Code/CachedExtensions'],
       win32: ['%AppData%/Code/Cache', '%AppData%/Code/CachedData', '%AppData%/Code/CachedExtensions'],
@@ -303,7 +303,7 @@ const APPLICATIONS = {
   intellij: {
     name: 'IntelliJ IDEA',
     category: 'Development',
-    icon: '🧠',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/JetBrains/IntelliJIdea*'],
       win32: ['%LocalAppData%/JetBrains/IntelliJIdea*/system'],
@@ -323,7 +323,7 @@ const APPLICATIONS = {
   androidstudio: {
     name: 'Android Studio',
     category: 'Development',
-    icon: '🤖',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/AndroidStudio*', '~/Library/Caches/Google/AndroidStudio*'],
       win32: ['%LocalAppData%/Google/AndroidStudio*/cache'],
@@ -343,7 +343,7 @@ const APPLICATIONS = {
   xcode: {
     name: 'Xcode',
     category: 'Development',
-    icon: '🔨',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Developer/Xcode/DerivedData', '~/Library/Caches/com.apple.dt.Xcode', '~/Library/Developer/Xcode/Archives'],
       win32: null,
@@ -363,7 +363,7 @@ const APPLICATIONS = {
   docker: {
     name: 'Docker',
     category: 'Development',
-    icon: '🐳',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Containers/com.docker.docker/Data/vms'],
       win32: ['%LocalAppData%/Docker'],
@@ -384,7 +384,7 @@ const APPLICATIONS = {
   chrome: {
     name: 'Google Chrome',
     category: 'Browsers',
-    icon: '🌐',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Google/Chrome', '~/Library/Application Support/Google/Chrome/Default/GPUCache', '~/Library/Application Support/Google/Chrome/ShaderCache'],
       win32: ['%LocalAppData%/Google/Chrome/User Data/Default/Cache', '%LocalAppData%/Google/Chrome/User Data/ShaderCache'],
@@ -404,7 +404,7 @@ const APPLICATIONS = {
   firefox: {
     name: 'Mozilla Firefox',
     category: 'Browsers',
-    icon: '🦊',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Firefox', '~/Library/Caches/Mozilla/Firefox'],
       win32: ['%LocalAppData%/Mozilla/Firefox/Profiles/*/cache2'],
@@ -424,7 +424,7 @@ const APPLICATIONS = {
   safari: {
     name: 'Safari',
     category: 'Browsers',
-    icon: '🧭',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/com.apple.Safari', '~/Library/Safari/WebKit/*/Cache.db'],
       win32: null,
@@ -444,7 +444,7 @@ const APPLICATIONS = {
   edge: {
     name: 'Microsoft Edge',
     category: 'Browsers',
-    icon: '🌊',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Microsoft Edge', '~/Library/Application Support/Microsoft Edge/Default/Cache'],
       win32: ['%LocalAppData%/Microsoft/Edge/User Data/Default/Cache'],
@@ -465,7 +465,7 @@ const APPLICATIONS = {
   notion: {
     name: 'Notion',
     category: 'Productivity',
-    icon: '📝',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Application Support/Notion/Cache', '~/Library/Caches/notion.id'],
       win32: ['%AppData%/Notion/Cache', '%AppData%/Notion/Code Cache'],
@@ -485,7 +485,7 @@ const APPLICATIONS = {
   evernote: {
     name: 'Evernote',
     category: 'Productivity',
-    icon: '🐘',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/com.evernote.Evernote'],
       win32: ['%LocalAppData%/Evernote/Evernote/Cache'],
@@ -505,7 +505,7 @@ const APPLICATIONS = {
   adobecc: {
     name: 'Adobe Creative Cloud',
     category: 'Productivity',
-    icon: '🎨',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Adobe', '~/Library/Application Support/Adobe/Common/Media Cache Files'],
       win32: ['%LocalAppData%/Adobe/Common/Media Cache Files', '%AppData%/Adobe/Common/Media Cache'],
@@ -525,7 +525,7 @@ const APPLICATIONS = {
   msoffice: {
     name: 'Microsoft Office',
     category: 'Productivity',
-    icon: '📊',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/com.microsoft.Word', '~/Library/Caches/com.microsoft.Excel', '~/Library/Caches/com.microsoft.Powerpoint'],
       win32: ['%LocalAppData%/Microsoft/Office/*/Cache'],
@@ -546,7 +546,7 @@ const APPLICATIONS = {
   homebrew: {
     name: 'Homebrew',
     category: 'System',
-    icon: '🍺',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Homebrew', '/Library/Caches/Homebrew'],
       win32: null,
@@ -566,7 +566,7 @@ const APPLICATIONS = {
   npm: {
     name: 'NPM Cache',
     category: 'Development',
-    icon: '📦',
+    icon: '',
     cachePaths: {
       darwin: ['~/.npm/_cacache'],
       win32: ['%AppData%/npm-cache'],
@@ -586,7 +586,7 @@ const APPLICATIONS = {
   yarn: {
     name: 'Yarn Cache',
     category: 'Development',
-    icon: '🧶',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Yarn'],
       win32: ['%LocalAppData%/Yarn/Cache'],
@@ -606,7 +606,7 @@ const APPLICATIONS = {
   pip: {
     name: 'Python pip Cache',
     category: 'Development',
-    icon: '🐍',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/pip'],
       win32: ['%LocalAppData%/pip/Cache'],
@@ -626,7 +626,7 @@ const APPLICATIONS = {
   gradle: {
     name: 'Gradle Cache',
     category: 'Development',
-    icon: '🐘',
+    icon: '',
     cachePaths: {
       darwin: ['~/.gradle/caches'],
       win32: ['%UserProfile%/.gradle/caches'],
@@ -646,7 +646,7 @@ const APPLICATIONS = {
   maven: {
     name: 'Maven Cache',
     category: 'Development',
-    icon: '📦',
+    icon: '',
     cachePaths: {
       darwin: ['~/.m2/repository'],
       win32: ['%UserProfile%/.m2/repository'],
@@ -667,7 +667,7 @@ const APPLICATIONS = {
   dropbox: {
     name: 'Dropbox',
     category: 'Cloud Storage',
-    icon: '📦',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/com.dropbox.DropboxMacUpdate', '~/Dropbox/.dropbox.cache'],
       win32: ['%LocalAppData%/Dropbox/logs'],
@@ -687,7 +687,7 @@ const APPLICATIONS = {
   googledrive: {
     name: 'Google Drive',
     category: 'Cloud Storage',
-    icon: '☁️',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Application Support/Google/DriveFS/*/content_cache'],
       win32: ['%LocalAppData%/Google/DriveFS/*/content_cache'],
@@ -707,7 +707,7 @@ const APPLICATIONS = {
   onedrive: {
     name: 'OneDrive',
     category: 'Cloud Storage',
-    icon: '☁️',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/com.microsoft.OneDrive'],
       win32: ['%LocalAppData%/Microsoft/OneDrive/logs'],
@@ -727,7 +727,7 @@ const APPLICATIONS = {
   postman: {
     name: 'Postman',
     category: 'Development',
-    icon: '📮',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Application Support/Postman/Cache'],
       win32: ['%AppData%/Postman/Cache'],
@@ -747,7 +747,7 @@ const APPLICATIONS = {
   figma: {
     name: 'Figma',
     category: 'Design',
-    icon: '🎨',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Application Support/Figma/Cache'],
       win32: ['%AppData%/Figma/Cache'],
@@ -767,7 +767,7 @@ const APPLICATIONS = {
   gimp: {
     name: 'GIMP',
     category: 'Design',
-    icon: '🖌️',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Application Support/GIMP/*/cache'],
       win32: ['%AppData%/GIMP/*/cache'],
@@ -787,7 +787,7 @@ const APPLICATIONS = {
   blender: {
     name: 'Blender',
     category: 'Design',
-    icon: '🎬',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Blender'],
       win32: ['%AppData%/Blender Foundation/Blender/*/cache'],
@@ -807,7 +807,7 @@ const APPLICATIONS = {
   unity: {
     name: 'Unity',
     category: 'Development',
-    icon: '🎮',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/com.unity3d.UnityEditor*'],
       win32: ['%LocalAppData%/Unity/cache'],
@@ -827,7 +827,7 @@ const APPLICATIONS = {
   sublimetext: {
     name: 'Sublime Text',
     category: 'Development',
-    icon: '✏️',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Sublime Text'],
       win32: ['%AppData%/Sublime Text/Cache'],
@@ -847,7 +847,7 @@ const APPLICATIONS = {
   atom: {
     name: 'Atom',
     category: 'Development',
-    icon: '⚛️',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Atom'],
       win32: ['%AppData%/Atom/Cache'],
@@ -867,7 +867,7 @@ const APPLICATIONS = {
   eclipse: {
     name: 'Eclipse',
     category: 'Development',
-    icon: '🌘',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/Eclipse'],
       win32: ['%LocalAppData%/Eclipse/cache'],
@@ -887,7 +887,7 @@ const APPLICATIONS = {
   pycharm: {
     name: 'PyCharm',
     category: 'Development',
-    icon: '🐍',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/JetBrains/PyCharm*'],
       win32: ['%LocalAppData%/JetBrains/PyCharm*/system'],
@@ -907,7 +907,7 @@ const APPLICATIONS = {
   webstorm: {
     name: 'WebStorm',
     category: 'Development',
-    icon: '🌐',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/JetBrains/WebStorm*'],
       win32: ['%LocalAppData%/JetBrains/WebStorm*/system'],
@@ -927,7 +927,7 @@ const APPLICATIONS = {
   rider: {
     name: 'Rider',
     category: 'Development',
-    icon: '🏇',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/JetBrains/Rider*'],
       win32: ['%LocalAppData%/JetBrains/Rider*/system'],
@@ -947,7 +947,7 @@ const APPLICATIONS = {
   visualstudio: {
     name: 'Visual Studio',
     category: 'Development',
-    icon: '🔷',
+    icon: '',
     cachePaths: {
       darwin: ['~/Library/Caches/VisualStudio'],
       win32: ['%LocalAppData%/Microsoft/VisualStudio/*/ComponentModelCache'],

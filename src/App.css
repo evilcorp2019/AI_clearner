@@ -6,7 +6,7 @@
   background: var(--bg-primary);
 }
 
-.electron-warning-banner {
+.app-warning-banner {
   background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
   color: white;
   padding: 16px 24px;
@@ -15,7 +15,7 @@
   animation: slideDown 0.3s ease-out;
 }
 
-.electron-warning-banner .warning-content {
+.app-warning-banner .warning-content {
   display: flex;
   align-items: flex-start;
   gap: 16px;
@@ -24,32 +24,32 @@
   flex-wrap: wrap;
 }
 
-.electron-warning-banner svg {
+.app-warning-banner svg {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
   margin-top: 2px;
 }
 
-.electron-warning-banner .warning-text {
+.app-warning-banner .warning-text {
   flex: 1;
 }
 
-.electron-warning-banner strong {
+.app-warning-banner strong {
   display: block;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 4px;
 }
 
-.electron-warning-banner p {
+.app-warning-banner p {
   margin: 0;
   font-size: 14px;
   line-height: 1.5;
   opacity: 0.95;
 }
 
-.electron-warning-banner code {
+.app-warning-banner code {
   background: rgba(255, 255, 255, 0.2);
   padding: 2px 6px;
   border-radius: 3px;
@@ -57,7 +57,7 @@
   font-size: 13px;
 }
 
-.electron-warning-banner .close-tab-button {
+.app-warning-banner .close-tab-button {
   background: white;
   color: #ff6b6b;
   border: none;
@@ -71,13 +71,13 @@
   white-space: nowrap;
 }
 
-.electron-warning-banner .close-tab-button:hover {
+.app-warning-banner .close-tab-button:hover {
   background: rgba(255, 255, 255, 0.9);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.electron-warning-banner .close-tab-button:active {
+.app-warning-banner .close-tab-button:active {
   transform: translateY(0);
 }
 
@@ -96,7 +96,9 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
 }
 
 .main-content {
@@ -104,8 +106,10 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   gap: 20px;
+  min-height: 0;
 }
 
 .control-panel {

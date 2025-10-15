@@ -5,7 +5,7 @@ function ProfileEditor({ profile, onSave, onCancel }) {
   const [formData, setFormData] = useState({
     name: profile?.name || '',
     description: profile?.description || '',
-    icon: profile?.icon || '🔧',
+    icon: profile?.icon || '',
     cleaningTasks: profile?.cleaningTasks || {
       browserHistory: { enabled: false },
       browserCookies: { enabled: false },
@@ -25,7 +25,7 @@ function ProfileEditor({ profile, onSave, onCancel }) {
     estimatedTime: profile?.estimatedTime || 300
   });
 
-  const icons = ['🔒', '🧹', '⚡', '💻', '🔧', '🗑️', '📦', '🚀', '🎯', '⭐'];
+  const icons = ['', '', '', '', '', '', '', '', '', ''];
 
   const handleSubmit = (e) => {
     e.preventDefault();

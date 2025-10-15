@@ -297,10 +297,9 @@ const StartupManager = () => {
     <div className="startup-manager">
       <div className="startup-header">
         <div className="header-title">
-          <h1>
-            <FaRocket /> Startup Program Manager
-          </h1>
-          <p>Optimize your boot time by managing startup programs</p>
+          <h2>
+            <FaRocket /> Quick Actions
+          </h2>
         </div>
 
         <button className="btn-refresh" onClick={handleRefresh} title="Refresh">
@@ -353,7 +352,7 @@ const StartupManager = () => {
           <div className="recommendations-list">
             {recommendations.slice(0, 5).map((rec, index) => (
               <div key={index} className="recommendation-item">
-                <span className="rec-icon">💡</span>
+                <span className="rec-icon"></span>
                 <span className="rec-text">
                   {rec.action === 'disable' ? 'Disable' : 'Delay'} <strong>{rec.program}</strong>{' '}
                   (saves ~{rec.savings}s)

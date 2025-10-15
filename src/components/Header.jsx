@@ -20,9 +20,6 @@ function Header({ systemInfo }) {
       <div className="header-content">
         <div className="logo">
           <h1>System Cleaner</h1>
-          {window.electronAPI && (
-            <span className="electron-badge">Electron App</span>
-          )}
         </div>
         <div className="header-right">
           {systemInfo && (

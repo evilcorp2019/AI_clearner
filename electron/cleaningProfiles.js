@@ -10,7 +10,7 @@ const DEFAULT_PROFILES = {
     id: 'privacy-mode',
     name: 'Privacy Mode',
     description: 'Remove browsing history and tracking data for enhanced privacy',
-    icon: '🔒',
+    icon: '',
     cleaningTasks: {
       browserHistory: {
         enabled: true,
@@ -65,7 +65,7 @@ const DEFAULT_PROFILES = {
     id: 'deep-clean',
     name: 'Deep Clean',
     description: 'Comprehensive system cleaning including browser data, temp files, and old downloads',
-    icon: '🧹',
+    icon: '',
     cleaningTasks: {
       browserHistory: {
         enabled: true,
@@ -128,7 +128,7 @@ const DEFAULT_PROFILES = {
     id: 'quick-maintenance',
     name: 'Quick Maintenance',
     description: 'Fast cleanup of temp files, trash, and recent items',
-    icon: '⚡',
+    icon: '',
     cleaningTasks: {
       browserHistory: {
         enabled: false
@@ -190,7 +190,7 @@ const DEFAULT_PROFILES = {
     id: 'developer-mode',
     name: 'Developer Mode',
     description: 'Clean development caches, build artifacts, and package manager files',
-    icon: '💻',
+    icon: '',
     cleaningTasks: {
       browserHistory: {
         enabled: false
@@ -358,7 +358,7 @@ class ProfileManager {
         id,
         name: profile.name,
         description: profile.description || '',
-        icon: profile.icon || '🔧',
+        icon: profile.icon || '',
         cleaningTasks: profile.cleaningTasks,
         options: profile.options || {
           askBeforeDelete: true,
